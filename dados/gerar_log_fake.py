@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import random
 import mysql.connector
 from datetime import datetime, timedelta
@@ -56,11 +58,11 @@ def gerar_logs_fake(conn, quantidade=5000):
 if __name__ == "__main__":
 
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="rs",
-        port=3306
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        port=int(os.getenv("DB_PORT"))
     )
 
     gerar_logs_fake(conn, quantidade=5000)
